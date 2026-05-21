@@ -1,18 +1,10 @@
 import { StatusBar } from "expo-status-bar"
 import { StyleSheet, Text, View } from "react-native"
 
-import CurrentWeather from "./CurrentWeather"
-import Forecast from "./Forecast"
-
-const location = { name: "Barcelona", latitude: 41.385063, longitude: 2.173404 }
-
 const App: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text>Weather App</Text>
-
-      <CurrentWeather location={location} />
-      <Forecast location={location} />
+      <Text>Temporary</Text>
 
       <StatusBar style="auto" />
     </View>
