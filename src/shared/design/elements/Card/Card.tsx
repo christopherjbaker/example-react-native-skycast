@@ -1,13 +1,18 @@
-import { StyleSheet, View } from "react-native"
+import { type StyleProp, type ViewStyle, StyleSheet, View } from "react-native"
 
 import { colors, shadows, shapes, spacing } from "#design/foundations"
 
 export type CardProps = {
+  style?: StyleProp<ViewStyle>
   children: React.ReactNode
 }
 
-const Card: React.FC<CardProps> = ({ children }) => {
-  return <View style={styles.container}>{children}</View>
+const Card: React.FC<CardProps> = ({ style, children, ...props }) => {
+  return (
+    <View {...props} style={[styles.container, style]}>
+      {children}
+    </View>
+  )
 }
 
 export default Card

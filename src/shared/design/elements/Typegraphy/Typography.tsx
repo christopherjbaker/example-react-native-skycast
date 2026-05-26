@@ -1,10 +1,11 @@
-import { Link, type LinkProps } from "expo-router"
-import { StyleSheet, Text } from "react-native"
+import { type LinkProps, Link } from "expo-router"
+import { type StyleProp, type TextStyle, StyleSheet, Text } from "react-native"
 
 import { typography } from "#design/foundations"
 
 export type TypographyProps = {
   variant?: keyof typeof typography
+  style?: StyleProp<TextStyle>
   children: React.ReactNode
 } & (
   | { href?: never }
@@ -13,19 +14,20 @@ export type TypographyProps = {
 
 const Typography: React.FC<TypographyProps> = ({
   variant = "normal",
+  style,
   children,
   ...props
 }) => {
   if ("href" in props && props.href) {
     return (
-      <Link {...props} style={styles[variant]}>
+      <Link {...props} style={[styles[variant], style]}>
         {children}
       </Link>
     )
   }
 
   return (
-    <Text {...props} style={styles[variant]}>
+    <Text {...props} style={[styles[variant], style]}>
       {children}
     </Text>
   )

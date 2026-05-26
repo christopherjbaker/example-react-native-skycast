@@ -67,10 +67,6 @@ export const Forecast: React.FC<{
 }
 
 const styles = StyleSheet.create({
-  // temperatureMax: { ...typography.large },
-  // temperatureMin: { ...typography.muted },
-  // condition: { ...typography.label },
-
   days: { flexGrow: 0, flexDirection: "row" },
   day: { flex: 1, alignItems: "center", marginHorizontal: spacing.between },
 })
