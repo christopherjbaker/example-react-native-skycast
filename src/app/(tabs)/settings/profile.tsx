@@ -1,45 +1,17 @@
-import * as Notifications from "expo-notifications"
 import { useEffect } from "react"
-import { Platform, StyleSheet, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 
 import Typography from "#design/elements/Typegraphy"
+import { createNotification } from "#shared/notifications"
 
 const App: React.FC = () => {
   useEffect(() => {
-    async function configureNotifications() {
-      const { status } = await Notifications.requestPermissionsAsync()
-      if (status !== Notifications.PermissionStatus.GRANTED) {
-        console.log("Permission to show notifications was denied")
-        return false
-      }
-
-      Notifications.setNotificationHandler({
-        handleNotification: async () => ({
-          shouldPlaySound: false,
-          shouldSetBadge: false,
-          shouldShowBanner: true,
-          shouldShowList: true,
-        }),
-      })
-
-      return true
-    }
-
     setTimeout(async () => {
-      await configureNotifications()
-
-      const id = await Notifications.scheduleNotificationAsync({
-        content: {
-          title: "Full Title",
-          subtitle: Platform.select({ android: "Short Title", ios: "" }),
-          body: "Body",
-        },
-        trigger: null,
+      await createNotification({
+        title: "Full Title",
+        short: "Short",
+        body: "Exercitation nulla pariatur minim proident ullamco et pariatur.",
       })
-
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      await Notifications.dismissNotificationAsync(id)
     }, 2500)
   }, [])
 
