@@ -2,23 +2,25 @@ import { useEffect } from "react"
 import { StyleSheet, View } from "react-native"
 
 import Typography from "#design/elements/Typegraphy"
-import { createNotification } from "#shared/notifications"
+import { subscribeDeviceMotion } from "#shared/sensors"
 
 const App: React.FC = () => {
-  useEffect(() => {
-    setTimeout(async () => {
-      await createNotification({
-        title: "Full Title",
-        short: "Short",
-        body: "Exercitation nulla pariatur minim proident ullamco et pariatur.",
-      })
-    }, 2500)
-  }, [])
+  useEffect(
+    () =>
+      subscribeDeviceMotion((motion) => {
+        console.log({
+          x: motion.accelerationIncludingGravity.x.toFixed(8),
+          y: motion.accelerationIncludingGravity.y.toFixed(8),
+          z: motion.accelerationIncludingGravity.z.toFixed(8),
+        })
+      }),
+    [],
+  )
 
   return (
     <>
       <View style={styles.container}>
-        <Typography variant="title">Profile</Typography>
+        <Typography variant="title">Device Motion</Typography>
       </View>
     </>
   )
