@@ -1,12 +1,13 @@
 import { StyleSheet, View } from "react-native"
 
 import TextField from "#design/elements/fields/Text"
-import Typography from "#design/elements/Typegraphy"
 import FormGroup from "#design/elements/FormGroup"
-import { useState } from "react"
+import Typography from "#design/elements/Typegraphy"
+import { useSettings, useSettingsSetter } from "#shared/settings"
 
 const App: React.FC = () => {
-  const [name, setName] = useState("Home")
+  const settings = useSettings()
+  const setSettings = useSettingsSetter()
 
   return (
     <>
@@ -14,7 +15,18 @@ const App: React.FC = () => {
         <Typography variant="title">Settings</Typography>
 
         <FormGroup label="Home Name">
-          <TextField onChange={setName} value={name} />
+          <TextField
+            onChange={(value) =>
+              setSettings({
+                ...settings,
+                home: {
+                  ...settings.home,
+                  name: value,
+                },
+              })
+            }
+            value={settings.home.name}
+          />
         </FormGroup>
       </View>
     </>

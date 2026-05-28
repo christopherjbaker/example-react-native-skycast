@@ -1,14 +1,14 @@
 import { Button, StyleSheet, View } from "react-native"
 
+import ToggleField from "#design/elements/fields/Toggle"
+import FormGroup from "#design/elements/FormGroup"
 import Typography from "#design/elements/Typegraphy"
 import { createNotification } from "#shared/notifications"
-import FormGroup from "#design/elements/FormGroup"
-import ToggleField from "#design/elements/fields/Toggle"
-import { useState } from "react"
+import { useSettings, useSettingsSetter } from "#shared/settings"
 
 const App: React.FC = () => {
-  const [enabled, setEnabled] = useState(false)
-  const [favorites, setFavorites] = useState(false)
+  const settings = useSettings()
+  const setSettings = useSettingsSetter()
 
   return (
     <>
@@ -16,13 +16,35 @@ const App: React.FC = () => {
         <Typography variant="title">Notifications</Typography>
 
         <FormGroup label="Enable Notifications">
-          <ToggleField onChange={setEnabled} value={enabled} />
+          <ToggleField
+            onChange={(value) =>
+              setSettings({
+                ...settings,
+                notifications: {
+                  ...settings.notifications,
+                  enabled: value,
+                },
+              })
+            }
+            value={settings.notifications.enabled}
+          />
         </FormGroup>
 
-        {enabled && (
+        {settings.notifications.enabled && (
           <>
             <FormGroup label="Favorites Warnings">
-              <ToggleField onChange={setFavorites} value={favorites} />
+              <ToggleField
+                onChange={(value) =>
+                  setSettings({
+                    ...settings,
+                    notifications: {
+                      ...settings.notifications,
+                      favorites: value,
+                    },
+                  })
+                }
+                value={settings.notifications.favorites}
+              />
             </FormGroup>
 
             <Button
