@@ -12,6 +12,7 @@ export default defineConfig(
       expo: pluginExpo,
     },
     rules: {
+      "jest/expect-expect": "off",
       "expo/use-dom-exports": "error",
       "expo/no-env-var-destructuring": "error",
       "expo/no-dynamic-env-var": "error",

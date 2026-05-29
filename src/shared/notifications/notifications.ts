@@ -8,7 +8,7 @@ export async function configureNotifications(): Promise<boolean> {
 
   const { status } = await Notifications.requestPermissionsAsync()
   if (status !== Notifications.PermissionStatus.GRANTED) {
-    console.log("Permission to show notifications was denied")
+    console.warn("Permission to show notifications was denied")
 
     configured = false
     return false

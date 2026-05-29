@@ -8,7 +8,7 @@ export async function configureDeviceMotion(): Promise<boolean> {
 
   const { status } = await DeviceMotion.getPermissionsAsync()
   if (status !== PermissionStatus.GRANTED) {
-    console.log("Permission to access DeviceMotion was denied")
+    console.warn("Permission to access DeviceMotion was denied")
 
     configured = false
     return false
