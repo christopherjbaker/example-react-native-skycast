@@ -15,6 +15,7 @@
     "lint-prettier": "prettier --check .",
     "lint-knip": "knip",
     "test": "jest --watchAll",
+    "test:ci": "jest",
     "start": "expo start --clear"
   },
   "jest": {
