@@ -16,7 +16,8 @@
     "lint-knip": "knip",
     "test": "jest --watchAll",
     "test:ci": "jest --coverage",
-    "start": "expo start --clear"
+    "start": "expo start --clear",
+    "build": "eas build --platform android --non-interactive --no-wait"
   },
   "jest": {
     "preset": "jest-expo"
@@ -49,6 +50,7 @@
     "@testing-library/react-native": "^13.3.3",
     "@types/jest": "^30.0.0",
     "@types/react": "~19.1.0",
+    "eas-cli": "^20.0.0",
     "eslint": "^9.39.4",
     "eslint-plugin-expo": "^1.0.3",
     "expo-asset": "^56.0.15",
