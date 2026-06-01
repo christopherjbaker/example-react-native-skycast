@@ -51,7 +51,9 @@ export const CurrentWeather: React.FC<{
     <Card>
       <Pressable onPress={() => hapticImpact()}>
         <View style={styles.current}>
-          <Typography variant="title">{data?.temperature ?? "--"} C</Typography>
+          <Typography variant="title">
+            {data?.temperature.toFixed(1) ?? "--"} C
+          </Typography>
           <Typography variant="muted">{location?.name ?? "--"}</Typography>
           <Typography variant="label">{data?.condition ?? "--"}</Typography>
         </View>

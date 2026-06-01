@@ -10,4 +10,14 @@ describe("Design > Elements > Typography", () => {
 
     expect(getByText("Hello!")).toHaveStyle({ fontSize: 16 })
   })
+
+  it("renders links with the normal styles", () => {
+    const { getByText } = render(
+      <Typography variant="normal" href="/">
+        Hello!
+      </Typography>,
+    )
+
+    expect(getByText("Hello!")).toHaveStyle({ fontSize: 16 })
+  })
 })
