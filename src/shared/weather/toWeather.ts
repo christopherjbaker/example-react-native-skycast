@@ -29,15 +29,19 @@ const codeMap = {
   77: "Light Snow", // Snow Grains
   85: "Light Snow", // Snow Showers: Light
   86: "Heavy Snow", // Snow Showers: Heavy
+
+  95: "Thunderstorm", // Thunderstorm: Slight or moderate
+  96: "Thunderstorm", // Thunderstorm with slight and heavy hail
+  99: "Thunderstorm", // Thunderstorm with slight and heavy hail
 } as const
 
 export type WeatherCode = keyof typeof codeMap
-export type Weather = (typeof codeMap)[WeatherCode]
+export type Weather = (typeof codeMap)[WeatherCode] | "Unknown"
 
 export default function toWeather(input: number): Weather {
   if (input in codeMap) {
     return codeMap[input as WeatherCode]
   }
 
-  throw new Error("toWeather: Invalid input.")
+  return "Unknown"
 }

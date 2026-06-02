@@ -5,7 +5,7 @@ describe("Weather > toWeather", () => {
     expect(toWeather(0)).toEqual("Clear")
   })
 
-  it("fails with -1", () => {
-    expect(() => toWeather(-1)).toThrow()
+  it("works with -1", () => {
+    expect(toWeather(-1)).toEqual("Unknown")
   })
 })
