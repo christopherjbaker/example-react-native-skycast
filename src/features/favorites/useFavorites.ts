@@ -1,30 +1,65 @@
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
-import { type WeatherLocation } from "#shared/weather"
+import {
+  getFavorite,
+  getFavorites,
+  insertFavorite,
+  updateFavorite,
+} from "./favorites"
+import { type Favorite } from "./types"
 
-const STORAGE_KEY = "favorites"
-
-export function useFavorites(): [WeatherLocation[]] {
-  const [favorites, setFavorites] = useState<WeatherLocation[]>([])
+export function useFavorites(): Favorite[] {
+  const [favorites, setFavorites] = useState<Favorite[]>([])
 
   useEffect(() => {
-    // void AsyncStorage.setItem(
-    //   STORAGE_KEY,
-    //   JSON.stringify([
-    //     { name: "Reno", latitude: 39.5299, longitude: 119.8143 },
-    //     { name: "Barcelona", latitude: 41.385063, longitude: 2.173404 },
-    //   ]),
-    // )
-
     void (async () => {
-      const cached = await AsyncStorage.getItem(STORAGE_KEY)
-      if (!cached) return
-
-      const favorites = JSON.parse(cached) as WeatherLocation[]
+      const favorites = await getFavorites()
       setFavorites(favorites)
     })()
   }, [])
 
-  return [favorites]
+  return favorites
+}
+
+export function useFavorite(id?: string): Favorite | undefined {
+  const [favorite, setFavorite] = useState<Favorite>()
+
+  useEffect(() => {
+    void (async () => {
+      if (!id) return
+
+      const favorite = await getFavorite(id)
+      setFavorite(favorite)
+    })()
+  }, [id])
+
+  return favorite
+}
+
+export function useFavoriteMutations(
+  id?: string,
+): [Favorite | undefined, (favorite: Omit<Favorite, "id">) => void] {
+  const [favorite, setFavorite] = useState<Favorite>()
+
+  useEffect(() => {
+    void (async () => {
+      if (!id) return
+
+      const favorite = await getFavorite(id)
+      setFavorite(favorite)
+    })()
+  }, [id])
+
+  const upsert = useCallback(
+    async (favorite: Omit<Favorite, "id">) => {
+      if (typeof id === "undefined") {
+        await insertFavorite(favorite)
+      } else {
+        await updateFavorite({ id, ...favorite })
+      }
+    },
+    [id],
+  )
+
+  return [favorite, upsert]
 }
