@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { StyleSheet, View } from "react-native"
 
 import Typography from "#design/elements/Typegraphy"
-import { subscribeDeviceMotion } from "#shared/sensors"
+import { subscribeDeviceMotion } from "#shared/device/sensors"
 
 const App: React.FC = () => {
   useEffect(
