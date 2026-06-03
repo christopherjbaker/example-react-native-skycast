@@ -8,6 +8,7 @@ const App: React.FC = () => {
   useEffect(
     () =>
       subscribeDeviceMotion((motion) => {
+        // eslint-disable-next-line no-console
         console.log({
           x: motion.accelerationIncludingGravity.x.toFixed(8),
           y: motion.accelerationIncludingGravity.y.toFixed(8),
