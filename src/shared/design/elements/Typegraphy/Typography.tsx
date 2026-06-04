@@ -6,6 +6,7 @@ import { typography } from "#design/foundations"
 export type TypographyProps = {
   variant?: keyof typeof typography
   style?: StyleProp<TextStyle>
+  onPress?: () => void
   children: React.ReactNode
 } & (
   | { href?: never }
