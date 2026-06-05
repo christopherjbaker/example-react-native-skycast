@@ -18,7 +18,7 @@
     "test": "jest --watchAll",
     "test:ci": "jest --coverage",
     "start": "expo start --clear",
-    "build": "eas build --platform android --non-interactive --no-wait"
+    "build": "eas build --platform android"
   },
   "jest": {
     "preset": "jest-expo"

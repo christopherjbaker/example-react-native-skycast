@@ -7,6 +7,7 @@ export type TypographyProps = {
   variant?: keyof typeof typography
   style?: StyleProp<TextStyle>
   onPress?: () => void
+  nativeId?: string
   children: React.ReactNode
 } & (
   | { href?: never }
@@ -16,19 +17,20 @@ export type TypographyProps = {
 const Typography: React.FC<TypographyProps> = ({
   variant = "normal",
   style,
+  nativeId,
   children,
   ...props
 }) => {
   if ("href" in props && props.href) {
     return (
-      <Link {...props} style={[styles[variant], style]}>
+      <Link {...props} nativeID={nativeId} style={[styles[variant], style]}>
         {children}
       </Link>
     )
   }
 
   return (
-    <Text {...props} style={[styles[variant], style]}>
+    <Text {...props} nativeID={nativeId} style={[styles[variant], style]}>
       {children}
     </Text>
   )
